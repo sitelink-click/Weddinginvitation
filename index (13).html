@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aisha & Aklaquur – Wedding Invitation</title>
+  <meta name="description" content="You are invited to the wedding of Aisha Zohra & Aklaquur Rahman" />
+  <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Aref+Ruqaa:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #f6eee6;
+      --cream-2: #efe3d5;
+      --silk: #fbf6f0;
+      --brown: #8a6a3e;
+      --brown-grad: linear-gradient(135deg, #a98550 0%, #7b5a2f 55%, #9c7a45 100%);
+      --ink: #5b4636;
+      --ink-soft: #8c7a69;
+      --burg: #7a1a34;
+      --burg-deep: #5e1327;
+      --blush: #d9a9a6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Cormorant Garamond", serif; background: var(--silk); color: var(--ink); overflow-x: hidden; }
+    body.locked { overflow: hidden; height: 100vh; }
+
+    .brown-text { background: var(--brown-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+    #fx { position: fixed; inset: 0; pointer-events: none; z-index: 50; }
+
+    /* ======= SILK BACKGROUND ======= */
+    .silk {
+      background:
+        radial-gradient(ellipse 60% 40% at 85% 10%, rgba(255,255,255,.9), transparent 70%),
+        radial-gradient(ellipse 50% 35% at 10% 85%, rgba(255,255,255,.8), transparent 70%),
+        radial-gradient(ellipse 70% 30% at 50% 50%, rgba(232,214,196,.45), transparent 75%),
+        linear-gradient(160deg, #fbf6f0, #f0e4d6 60%, #f8f0e7);
+    }
+
+    /* ======= FLORALS ======= */
+    .fl { position: absolute; pointer-events: none; width: var(--w, 300px); z-index: 3; }
+    .fl svg { width: 100%; height: auto; display: block; transform-origin: 0 0; animation: sway 7s ease-in-out infinite; filter: drop-shadow(0 8px 10px rgba(60,20,30,.25)); }
+    .fl.tl { top: var(--y, 0); left: var(--x, 0); }
+    .fl.tr { top: var(--y, 0); right: var(--x, 0); transform: scaleX(-1); }
+    .fl.bl { bottom: var(--y, 0); left: var(--x, 0); transform: scaleY(-1); }
+    .fl.br { bottom: var(--y, 0); right: var(--x, 0); transform: scale(-1, -1); }
+    .fl.tr svg { animation-delay: -2s; } .fl.bl svg { animation-delay: -4s; } .fl.br svg { animation-delay: -1s; }
+    @keyframes sway { 0%,100% { transform: rotate(-1.6deg) scale(1); } 50% { transform: rotate(1.8deg) scale(1.025); } }
+
+    /* ======= INTRO ======= */
+    #intro {
+      position: fixed; inset: 0; z-index: 40; overflow: hidden;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+      transition: opacity 1.2s ease, transform 1.2s ease, visibility 1.2s;
+    }
+    #intro.gone { opacity: 0; transform: scale(1.12); visibility: hidden; }
+    #intro .fl { --w: min(250px, 52vw); --x: -30px; --y: -30px; }
+    .intro-top { position: relative; z-index: 4; font-family: "Montserrat", sans-serif; letter-spacing: 6px; font-size: .68rem; text-transform: uppercase; color: var(--brown); margin-bottom: 8px; }
+    .intro-names { position: relative; z-index: 4; font-family: "Pinyon Script", cursive; font-weight: 400; font-size: clamp(2.6rem, 10vw, 4.4rem); line-height: 1.15; margin-bottom: 46px; }
+
+    .envelope { position: relative; z-index: 4; width: min(330px, 78vw); height: min(215px, 51vw); cursor: pointer; animation: float 3.5s ease-in-out infinite; perspective: 900px; }
+    @keyframes float { 50% { transform: translateY(-12px); } }
+    .envelope.open { animation: none; }
+    .env-back { position: absolute; inset: 0; background: #e6d6c2; border-radius: 6px; box-shadow: 0 28px 50px rgba(90,50,40,.28); }
+    .letter { position: absolute; left: 8%; right: 8%; bottom: 6%; height: 92%; background: #fffaf4; border: 1px solid #e4cfae; border-radius: 4px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 4px; transition: transform 1s cubic-bezier(.2,.8,.2,1) .6s; z-index: 2; }
+    .letter b { font-family: "Pinyon Script", cursive; font-size: 1.9rem; font-weight: 400; line-height: 1.2; text-align: center; }
+    .letter small { font-family: "Montserrat", sans-serif; font-size: .52rem; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-soft); }
+    .envelope.open .letter { transform: translateY(-85%); }
+    .env-front { position: absolute; inset: 0; z-index: 3; border-radius: 6px; background: linear-gradient(160deg, #f6ebdc, #ebdcc6); clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%); }
+    .flap { position: absolute; top: 0; left: 0; width: 100%; height: 55%; background: linear-gradient(180deg, #efe1cd, #e2d0b8); transform-origin: top; z-index: 4; clip-path: polygon(0 0, 100% 0, 50% 100%); transition: transform .8s ease, z-index 0s .4s; }
+    .envelope.open .flap { transform: rotateX(180deg); z-index: 1; }
+    .seal {
+      position: absolute; top: 55%; left: 50%; width: 58px; height: 58px; margin: -29px 0 0 -29px; border-radius: 50%; z-index: 5;
+      display: grid; place-items: center; color: #f0d58a; font-family: "Pinyon Script", cursive; font-size: 1.5rem; letter-spacing: 1px;
+      background: radial-gradient(circle at 30% 30%, #b03352, var(--burg) 60%, var(--burg-deep));
+      box-shadow: 0 4px 12px rgba(60,10,25,.5), inset 0 0 0 3px rgba(255,255,255,.12);
+      animation: pulse 1.8s infinite; transition: opacity .4s, transform .4s;
+    }
+    .envelope.open .seal { opacity: 0; transform: scale(0); animation: none; }
+    @keyframes pulse { 0%,100% { box-shadow: 0 4px 12px rgba(60,10,25,.5), 0 0 0 0 rgba(122,26,52,.5); } 50% { box-shadow: 0 4px 12px rgba(60,10,25,.5), 0 0 0 16px rgba(122,26,52,0); } }
+    .tap { position: relative; z-index: 4; margin-top: 44px; font-family: "Montserrat", sans-serif; letter-spacing: 5px; font-size: .68rem; text-transform: uppercase; color: var(--burg); animation: blink 1.8s infinite; }
+    @keyframes blink { 50% { opacity: .25; } }
+
+    /* ======= MAIN ======= */
+    main { opacity: 0; transition: opacity 1.5s ease .5s; }
+    body.opened main { opacity: 1; }
+    section { padding: 100px 22px; text-align: center; position: relative; overflow: hidden; }
+    .container { max-width: 900px; margin: 0 auto; position: relative; z-index: 4; }
+    .kicker { font-family: "Montserrat", sans-serif; letter-spacing: 6px; text-transform: uppercase; font-size: .66rem; color: var(--brown); margin-bottom: 14px; }
+    h2 { font-family: "Pinyon Script", cursive; font-weight: 400; font-size: clamp(2.8rem, 9vw, 4rem); line-height: 1.2; }
+    .ornament { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 18px auto 36px; max-width: 240px; color: var(--burg); }
+    .ornament::before, .ornament::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--brown)); }
+    .ornament::after { transform: scaleX(-1); }
+    .ornament i { font-style: normal; font-size: .8rem; }
+
+    /* HERO CARD */
+    .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 90px 22px; }
+    .paper {
+      position: relative; z-index: 2; width: min(88vw, 470px); padding: 64px 30px 56px;
+      background: linear-gradient(170deg, #f9f2ea, var(--cream));
+      box-shadow: 0 30px 70px rgba(90,50,40,.25), 0 2px 6px rgba(90,50,40,.12);
+    }
+    .hero .fl { --w: min(330px, 62vw); }
+    .hero .fl.tl { --x: -12vw; --y: -70px; } .hero .fl.tr { --x: -14vw; --y: -40px; }
+    .hero .fl.bl { --x: -14vw; --y: -60px; } .hero .fl.br { --x: -12vw; --y: -70px; }
+    @media (min-width: 700px) {
+      .hero .fl { --w: 340px; }
+      .hero .fl.tl { --x: calc(50% - 400px); --y: -40px; } .hero .fl.tr { --x: calc(50% - 400px); --y: -20px; }
+      .hero .fl.bl { --x: calc(50% - 400px); --y: -30px; } .hero .fl.br { --x: calc(50% - 400px); --y: -40px; }
+    }
+    .bismillah { font-family: "Aref Ruqaa", serif; font-weight: 700; font-size: clamp(2.2rem, 9vw, 3rem); line-height: 1.5; }
+    .caps { font-family: "Montserrat", sans-serif; font-size: .6rem; letter-spacing: 3.5px; text-transform: uppercase; color: var(--brown); line-height: 1.8; }
+    .together { margin-top: 38px; }
+    .names { margin: 10px 0 24px; font-family: "Pinyon Script", cursive; font-weight: 400; line-height: 1.15; }
+    .names .nm { display: block; font-size: clamp(2.7rem, 11.5vw, 3.7rem); }
+    .names .amp { display: block; font-size: 2.1rem; color: var(--brown); }
+    .datebox { margin: 30px auto 28px; max-width: 360px; }
+    .datebox .month { font-family: "Montserrat", sans-serif; font-size: .78rem; letter-spacing: 6px; text-transform: uppercase; color: var(--ink); margin-bottom: 8px; }
+    .datebox .row { display: flex; align-items: center; justify-content: center; gap: 12px; }
+    .datebox .row::before, .datebox .row::after { content: ""; flex: 1; height: 1px; background: var(--brown); opacity: .6; }
+    .datebox .row span { font-family: "Montserrat", sans-serif; font-size: .7rem; letter-spacing: 3.5px; text-transform: uppercase; }
+    .datebox .row b { font-family: "Cormorant Garamond", serif; font-weight: 500; font-size: 3.1rem; line-height: 1; color: var(--ink); }
+    .datebox .year { margin-top: 6px; font-family: "Montserrat", sans-serif; font-size: .75rem; letter-spacing: 5px; color: var(--ink-soft); }
+    .venue { font-family: "Montserrat", sans-serif; font-weight: 500; font-size: .72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--ink); margin-top: 8px; }
+    .note { margin-top: 26px; font-family: "Montserrat", sans-serif; font-size: .56rem; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink-soft); line-height: 2; }
+    .scroll { position: absolute; bottom: 20px; left: 50%; margin-left: -30px; z-index: 5; font-family: "Montserrat", sans-serif; font-size: .6rem; letter-spacing: 5px; text-transform: uppercase; color: var(--burg); text-decoration: none; animation: bounce 2s infinite; }
+    @keyframes bounce { 50% { transform: translateY(8px); } }
+
+    /* Countdown */
+    .countdown { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+    .countdown div { width: 100px; padding: 22px 8px; background: rgba(255,252,247,.9); border: 1px solid #e3cfb0; box-shadow: 0 12px 28px rgba(90,50,40,.1); position: relative; }
+    .countdown div::after { content: ""; position: absolute; left: 22%; right: 22%; bottom: 0; height: 2px; background: var(--burg); }
+    .countdown b { display: block; font-size: 2.8rem; font-weight: 500; line-height: 1; color: var(--burg); }
+    .countdown small { font-family: "Montserrat", sans-serif; font-size: .58rem; letter-spacing: 3px; text-transform: uppercase; color: var(--ink-soft); }
+    #countdown .fl { --w: 200px; --x: -50px; --y: -40px; opacity: .95; }
+
+    /* Quote */
+    .quote { font-size: 1.7rem; font-style: italic; max-width: 660px; margin: 0 auto; line-height: 1.7; }
+    .quote cite { display: block; margin-top: 16px; font-style: normal; font-family: "Montserrat", sans-serif; font-size: .66rem; letter-spacing: 4px; color: var(--burg); }
+    .invite-text { margin: 36px auto 0; max-width: 600px; font-size: 1.35rem; line-height: 1.8; color: var(--ink-soft); }
+    .quote-sec .fl { --w: 220px; --x: -60px; --y: -50px; }
+
+    /* Families */
+    .families { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; }
+    .fam .role { font-family: "Montserrat", sans-serif; letter-spacing: 4px; font-size: .6rem; text-transform: uppercase; color: var(--burg); margin-bottom: 6px; }
+    .fam h3 { font-family: "Pinyon Script", cursive; font-weight: 400; font-size: 2.6rem; }
+    .fam p { font-size: 1.2rem; color: var(--ink-soft); line-height: 1.6; }
+
+    /* Events */
+    .events { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 26px; }
+    .event { background: rgba(255,252,247,.92); padding: 40px 24px; border: 1px solid #ead9c1; position: relative; transition: transform .4s, box-shadow .4s; }
+    .event::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--burg-deep), var(--burg), var(--blush)); }
+    .event:hover { transform: translateY(-10px); box-shadow: 0 26px 50px rgba(90,50,40,.18); }
+    .event .ico { font-size: 2rem; }
+    .event h3 { font-size: 1.8rem; font-weight: 500; margin: 6px 0; }
+    .event .time { font-family: "Montserrat", sans-serif; font-size: .7rem; letter-spacing: 4px; color: var(--burg); margin-bottom: 12px; }
+    .event p { font-size: 1.2rem; line-height: 1.6; color: var(--ink-soft); }
+    .dress { margin-top: 50px; }
+    .swatches { display: flex; justify-content: center; gap: 12px; margin-top: 14px; }
+    .swatches span { width: 34px; height: 34px; border-radius: 50%; border: 1px solid #e3cfb0; box-shadow: 0 4px 10px rgba(0,0,0,.1); }
+    .program .fl { --w: 220px; --x: -70px; --y: -60px; }
+
+    /* Buttons */
+    .btn { display: inline-block; margin: 8px; padding: 15px 34px; cursor: pointer; border: 0; background: linear-gradient(135deg, var(--burg), #9b2a4a); color: #fff; text-decoration: none; font-family: "Montserrat", sans-serif; font-size: .7rem; letter-spacing: 3px; text-transform: uppercase; transition: transform .3s, box-shadow .3s; }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 14px 26px rgba(122,26,52,.4); }
+    .btn.ghost { background: transparent; color: var(--burg); border: 1px solid var(--burg); }
+    .btn.ghost:hover { background: var(--burg); color: #fff; }
+
+    /* RSVP */
+    .rsvp .by { margin-bottom: 26px; font-style: italic; font-size: 1.25rem; color: var(--ink-soft); }
+    form { max-width: 480px; margin: 0 auto; display: grid; gap: 14px; text-align: left; background: rgba(255,252,247,.95); padding: 36px 30px; border: 1px solid #ead9c1; box-shadow: 0 24px 60px rgba(90,50,40,.14); }
+    input, select, textarea { width: 100%; padding: 14px 16px; border: 1px solid #e3d2bb; background: var(--cream); color: var(--ink); font-family: "Montserrat", sans-serif; font-size: .85rem; transition: border-color .3s, box-shadow .3s; }
+    input::placeholder, textarea::placeholder { color: #b0a08f; }
+    input:focus, select:focus, textarea:focus { outline: 0; border-color: var(--burg); box-shadow: 0 0 0 3px rgba(122,26,52,.12); }
+    form .btn { margin: 6px 0 0; width: 100%; }
+    .rsvp .fl { --w: 230px; --x: -70px; --y: -60px; }
+
+    footer { position: relative; overflow: hidden; background: var(--cream); text-align: center; padding: 70px 20px; border-top: 1px solid #e3cfb0; }
+    footer .names { font-family: "Pinyon Script", cursive; font-size: 2.8rem; position: relative; z-index: 4; }
+    footer p { margin-top: 6px; font-size: 1.1rem; color: var(--ink-soft); letter-spacing: 1px; position: relative; z-index: 4; }
+
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s ease, transform 1s ease; }
+    .reveal.show { opacity: 1; transform: none; }
+    .d1 { transition-delay: .15s; } .d2 { transition-delay: .3s; } .d3 { transition-delay: .45s; }
+
+    #music { position: fixed; right: 18px; bottom: 18px; z-index: 60; width: 48px; height: 48px; border-radius: 50%; border: 1px solid #d9bf96; cursor: pointer; background: #fffaf4; color: var(--burg); font-size: 1.2rem; box-shadow: 0 8px 20px rgba(90,50,40,.25); display: none; }
+    body.opened #music { display: block; }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition-duration: .01s !important; } }
+  </style>
+</head>
+<body class="locked">
+  <canvas id="fx"></canvas>
+
+  <!-- ===== INTRO ===== -->
+  <div id="intro" class="silk">
+    <div class="fl tl" data-fl="11"></div>
+    <div class="fl br" data-fl="23"></div>
+    <p class="intro-top">You are cordially invited</p>
+    <h1 class="intro-names brown-text"><span class="n-bride"></span> &amp; <span class="n-groom"></span></h1>
+
+    <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Open invitation">
+      <div class="env-back"></div>
+      <div class="letter"><small>The Wedding of</small><b class="brown-text"><span class="n-bride"></span> &amp; <span class="n-groom"></span></b><small class="dt-short"></small></div>
+      <div class="env-front"></div>
+      <div class="flap"></div>
+      <div class="seal" id="seal">A&amp;A</div>
+    </div>
+    <p class="tap">Tap to open</p>
+  </div>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+    <section class="hero silk" id="top">
+      <div class="fl tl" data-fl="31"></div>
+      <div class="fl tr" data-fl="47"></div>
+      <div class="fl bl" data-fl="59"></div>
+      <div class="fl br" data-fl="73"></div>
+
+      <div class="paper reveal">
+        <div class="bismillah brown-text">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</div>
+        <p class="caps">In the name of Allah<br/>the Most Merciful</p>
+
+        <p class="caps together">Together with their families</p>
+        <div class="names brown-text">
+          <span class="nm n-bride"></span>
+          <span class="amp">&amp;</span>
+          <span class="nm n-groom"></span>
+        </div>
+
+        <div class="datebox">
+          <div class="month" id="dMonth"></div>
+          <div class="row"><span id="dWeek"></span><b id="dDay"></b><span id="dTime"></span></div>
+          <div class="year" id="dYear"></div>
+        </div>
+
+        <p class="venue" id="venue"></p>
+        <p class="note">We kindly request no boxed gifts<br/>Please RSVP by <span id="rsvpBy"></span></p>
+      </div>
+      <a class="scroll" href="#countdown">Scroll</a>
+    </section>
+
+    <section id="countdown" class="silk">
+      <div class="fl tl" data-fl="5"></div>
+      <div class="container">
+        <p class="kicker reveal">Counting down</p>
+        <h2 class="brown-text reveal">Until we say “I do”</h2>
+        <div class="ornament reveal"><i>❖</i></div>
+        <div class="countdown reveal d1">
+          <div><b id="d">0</b><small>Days</small></div>
+          <div><b id="h">0</b><small>Hours</small></div>
+          <div><b id="m">0</b><small>Minutes</small></div>
+          <div><b id="s">0</b><small>Seconds</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-sec" style="background:var(--cream)">
+      <div class="fl tr" data-fl="88"></div>
+      <div class="container">
+        <p class="kicker reveal">With Allah's blessing</p>
+        <h2 class="brown-text reveal">Our promise</h2>
+        <div class="ornament reveal"><i>❖</i></div>
+        <p class="quote reveal d1">
+          “And among His signs is that He created for you spouses from among yourselves, that you may find tranquility in them, and He placed between you affection and mercy.”
+          <cite>QURAN 30:21</cite>
+        </p>
+        <p class="invite-text reveal d2">With hearts full of gratitude, we invite you to share in the beginning of our new journey. Your presence and duas will make our day truly unforgettable.</p>
+      </div>
+    </section>
+
+    <section class="silk">
+      <div class="container">
+        <p class="kicker reveal">Hosted by</p>
+        <h2 class="brown-text reveal">Our families</h2>
+        <div class="ornament reveal"><i>❖</i></div>
+        <div class="families">
+          <div class="fam reveal d1"><div class="role">The Bride</div><h3 class="brown-text n-bride"></h3><p>Daughter of Mr. &amp; Mrs. Yusuf Al Hashemi</p></div>
+          <div class="fam reveal d2"><div class="role">The Groom</div><h3 class="brown-text n-groom"></h3><p>Son of Mr. &amp; Mrs. Khalid Al Mansoori</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="program" style="background:var(--cream)">
+      <div class="fl bl" data-fl="101"></div>
+      <div class="container">
+        <p class="kicker reveal">The celebration</p>
+        <h2 class="brown-text reveal">Wedding day</h2>
+        <div class="ornament reveal"><i>❖</i></div>
+        <div class="events">
+          <div class="event reveal d1"><div class="ico">💍</div><h3>Nikah</h3><div class="time">5:30 PM</div><p>Grand Palace Ballroom<br/>Dubai, UAE</p></div>
+          <div class="event reveal d2"><div class="ico">🥀</div><h3>Reception</h3><div class="time">7:00 PM</div><p>Welcome drinks, photos<br/>and live music</p></div>
+          <div class="event reveal d3"><div class="ico">✨</div><h3>Dinner</h3><div class="time">8:30 PM</div><p>A grand feast<br/>followed by celebration</p></div>
+        </div>
+        <div class="dress reveal">
+          <p class="kicker">Dress code</p>
+          <p style="font-size:1.3rem;font-style:italic;color:var(--ink-soft)">Elegant · Burgundy, blush &amp; ivory tones</p>
+          <div class="swatches"><span style="background:#fffaf4"></span><span style="background:#d9a9a6"></span><span style="background:#962640"></span><span style="background:#5e1327"></span></div>
+        </div>
+        <div class="reveal" style="margin-top:46px">
+          <a class="btn" href="https://maps.google.com/?q=Dubai" target="_blank" rel="noopener">Get Directions</a>
+          <a class="btn ghost" id="calBtn" target="_blank" rel="noopener">Add to Calendar</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="rsvp silk" id="rsvp">
+      <div class="fl br" data-fl="127"></div>
+      <div class="container">
+        <p class="kicker reveal">Kindly reply</p>
+        <h2 class="brown-text reveal">RSVP</h2>
+        <div class="ornament reveal"><i>❖</i></div>
+        <p class="by reveal">Please respond by <span class="rsvpBy2"></span></p>
+        <form id="rsvpForm" class="reveal d1">
+          <input id="name" required placeholder="Your full name" />
+          <select id="attend"><option>Joyfully accepts</option><option>Regretfully declines</option></select>
+          <select id="guests"><option value="1">1 guest</option><option value="2">2 guests</option><option value="3">3 guests</option><option value="4">4 guests</option><option value="5">5+ guests</option></select>
+          <textarea id="note" rows="3" placeholder="A message for the couple (optional)"></textarea>
+          <button class="btn" type="submit">Send via WhatsApp</button>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div class="names brown-text"><span class="n-bride"></span> &amp; <span class="n-groom"></span></div>
+      <p class="dt-short"></p>
+    </footer>
+  </main>
+
+  <button id="music" title="Toggle music" aria-label="Toggle music">♪</button>
+  <!-- Add your own nasheed/song file (e.g. song.mp3) next to index.html -->
+  <audio id="audio" loop src="song.mp3"></audio>
+
+  <script>
+    /* ========= EDIT THESE ========= */
+    const BRIDE = "Aisha Zohra";
+    const GROOM = "Aklaquur Rahman";
+    const WEDDING_DATE = new Date("2026-12-12T17:30:00+04:00");
+    const RSVP_BY = "28 November 2026";
+    const VENUE = "Grand Palace Ballroom, Dubai";
+    const WHATSAPP = "971500000000";      // country code + number, no + or spaces
+    /* ============================== */
+
+    // ---- fill in text ----
+    document.querySelectorAll(".n-bride").forEach(e => e.textContent = BRIDE);
+    document.querySelectorAll(".n-groom").forEach(e => e.textContent = GROOM);
+    document.getElementById("seal").textContent = BRIDE[0] + "&" + GROOM[0];
+    document.getElementById("venue").textContent = VENUE;
+    document.getElementById("rsvpBy").textContent = RSVP_BY;
+    document.querySelector(".rsvpBy2").textContent = RSVP_BY;
+    const tz = { timeZone: "Asia/Dubai" };
+    const L = (o) => WEDDING_DATE.toLocaleString("en-GB", { ...tz, ...o });
+    document.getElementById("dMonth").textContent = L({ month: "long" }).toUpperCase();
+    document.getElementById("dWeek").textContent = L({ weekday: "long" }).toUpperCase();
+    document.getElementById("dDay").textContent = L({ day: "2-digit" });
+    document.getElementById("dYear").textContent = L({ year: "numeric" });
+    document.getElementById("dTime").textContent = WEDDING_DATE.toLocaleTimeString("en-US", { ...tz, hour: "numeric", minute: "2-digit" }).toUpperCase();
+    document.querySelectorAll(".dt-short").forEach(e => e.textContent = L({ day: "numeric", month: "long", year: "numeric" }));
+
+    // ---- procedural flowers (burgundy dahlias, blush roses, baby's breath) ----
+    function rng(a) { return function () { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+    function leaf(x, y, len, ang, col) {
+      const w = len * .26;
+      return `<g transform="translate(${x} ${y}) rotate(${ang})"><path d="M0 0C${w} ${-len*.3} ${w} ${-len*.7} 0 ${-len}C${-w} ${-len*.7} ${-w} ${-len*.3} 0 0Z" fill="${col}"/><path d="M0 0L0 ${-len*.9}" stroke="rgba(255,255,255,.18)" stroke-width=".8"/></g>`;
+    }
+    function dahlia(x, y, r, rot) {
+      const cols = ["#6f1730", "#8a1f3b", "#a42c4b", "#7a1a34"];
+      let s = `<g transform="translate(${x} ${y}) rotate(${rot})">`;
+      [{ n: 14, k: 1, c: 0 }, { n: 12, k: .78, c: 1 }, { n: 10, k: .56, c: 2 }, { n: 8, k: .36, c: 3 }].forEach((l, i) => {
+        for (let j = 0; j < l.n; j++) {
+          s += `<ellipse cx="0" cy="${-r*l.k*.55}" rx="${r*l.k*.2}" ry="${r*l.k*.45}" transform="rotate(${j*360/l.n + i*13})" fill="${cols[l.c]}" stroke="rgba(40,5,15,.35)" stroke-width=".6"/>`;
+        }
+      });
+      s += `<circle r="${r*.14}" fill="#c99a45"/>`;
+      for (let j = 0; j < 8; j++) { const a = j * Math.PI / 4; s += `<circle cx="${Math.cos(a)*r*.09}" cy="${Math.sin(a)*r*.09}" r="${r*.025}" fill="#f0d58a"/>`; }
+      return s + "</g>";
+    }
+    function rose(x, y, r) {
+      const cols = ["#d8a6a4", "#e3b8b5", "#cf9794", "#e9c6c2", "#c98a88", "#dba9a6"];
+      let s = `<g transform="translate(${x} ${y})">`;
+      for (let i = 0; i < 6; i++) s += `<circle cx="${(i%2?1:-1)*r*.04*i}" cy="${(i%3-1)*r*.04*i}" r="${r*(1-i*.16)}" fill="${cols[i]}" stroke="rgba(120,60,60,.35)" stroke-width=".7"/>`;
+      s += `<path d="M${-r*.35} ${-r*.1}Q0 ${-r*.5} ${r*.35} ${-r*.05}M${-r*.25} ${r*.2}Q0 ${r*.45} ${r*.3} ${r*.15}" fill="none" stroke="rgba(120,60,60,.5)" stroke-width=".8"/>`;
+      return s + "</g>";
+    }
+    function sprig(R, x, y, len, ang, col, fill, dot) {
+      let s = `<g transform="translate(${x} ${y}) rotate(${ang})" stroke="${col}" fill="none" stroke-width=".9"><path d="M0 0Q${len*.1} ${-len*.5} 0 ${-len}"/>`;
+      for (let i = 1; i <= 5; i++) {
+        const yy = -len * i / 6, side = i % 2 ? 1 : -1, l = len * (.3 - .02 * i);
+        s += `<path d="M0 ${yy}Q${side*l*.5} ${yy-l*.3} ${side*l} ${yy-l*.7}"/>`;
+        for (let k = 0; k < 3; k++) s += `<circle cx="${side*l+(R()-.5)*9}" cy="${yy-l*.7+(R()-.5)*9}" r="${dot}" fill="${fill}" stroke-width=".4"/>`;
+      }
+      return s + "</g>";
+    }
+    function cluster(seed) {
+      const R = rng(seed), j = (v, a) => v + (R() - .5) * a;
+      const lc = ["#5b3f3a", "#6a4b3e", "#4a3a36", "#6b2a35"];
+      let s = `<svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">`;
+      for (let i = 0; i < 7; i++) s += leaf(R() * 40, R() * 40, 110 + R() * 90, 35 + R() * 140, lc[i % 4]);
+      for (let i = 0; i < 2; i++) s += sprig(R, R() * 30, R() * 30, 150 + R() * 50, 60 + R() * 80, "#7a1a34", "#8f2540", 2.6);
+      for (let i = 0; i < 3; i++) s += sprig(R, R() * 30, R() * 30, 150 + R() * 60, 50 + R() * 100, "#a99b86", "#fffdf8", 2.4);
+      s += dahlia(j(80, 12), j(72, 12), 66, R() * 360);
+      s += dahlia(j(205, 14), j(46, 10), 42, R() * 360);
+      s += rose(j(52, 10), j(178, 12), 44);
+      s += rose(j(172, 8), j(132, 10), 32);
+      s += dahlia(j(122, 8), j(188, 8), 30, R() * 360);
+      for (let i = 0; i < 2; i++) s += sprig(R, 20 + R() * 60, 40 + R() * 60, 90 + R() * 40, 80 + R() * 70, "#a99b86", "#ffffff", 2.4);
+      return s + "</svg>";
+    }
+    document.querySelectorAll("[data-fl]").forEach(el => el.innerHTML = cluster(+el.dataset.fl));
+
+    // ---- falling petals + confetti ----
+    const cv = document.getElementById("fx"), ctx = cv.getContext("2d");
+    let W, H, parts = [], petalsOn = false;
+    const colors = ["#d9a9a6", "#e9c4c0", "#7a1a34", "#962640", "#f6eee6", "#c9a24a"];
+    function resize() { W = cv.width = innerWidth; H = cv.height = innerHeight; }
+    addEventListener("resize", resize); resize();
+    function spawn(x, y, burst) {
+      parts.push({ x, y, vx: burst ? (Math.random() - .5) * 14 : (Math.random() - .5) * 1.2, vy: burst ? -Math.random() * 14 - 4 : Math.random() * 1.1 + .5, size: Math.random() * 7 + 4, rot: Math.random() * 6, vr: (Math.random() - .5) * .12, color: colors[Math.floor(Math.random() * colors.length)], burst, life: burst ? 220 : Infinity });
+    }
+    (function loop() {
+      ctx.clearRect(0, 0, W, H);
+      if (petalsOn && parts.length < 36 && Math.random() < .07) spawn(Math.random() * W, -20, false);
+      parts = parts.filter(p => p.y < H + 30 && p.life > 0);
+      for (const p of parts) {
+        p.x += p.vx + Math.sin(p.y / 40) * .4; p.y += p.vy; p.rot += p.vr; p.life--;
+        if (p.burst) { p.vy += .3; p.vx *= .99; }
+        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot);
+        ctx.globalAlpha = p.burst ? Math.min(1, p.life / 60) : .8; ctx.fillStyle = p.color;
+        ctx.beginPath(); ctx.ellipse(0, 0, p.size, p.size / 2, 0, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+      }
+      requestAnimationFrame(loop);
+    })();
+
+    // ---- open envelope ----
+    const env = document.getElementById("envelope"), musicBtn = document.getElementById("music"), audio = document.getElementById("audio");
+    let opened = false;
+    function openInvite() {
+      if (opened) return; opened = true;
+      env.classList.add("open");
+      setTimeout(() => { const r = env.getBoundingClientRect(); for (let i = 0; i < 110; i++) spawn(r.left + r.width / 2, r.top + 30, true); }, 700);
+      setTimeout(() => {
+        document.getElementById("intro").classList.add("gone");
+        document.body.classList.remove("locked"); document.body.classList.add("opened");
+        petalsOn = true; window.scrollTo(0, 0); revealOnScroll();
+        audio.play().then(() => musicBtn.textContent = "❚❚").catch(() => {});
+      }, 2400);
+    }
+    env.addEventListener("click", openInvite);
+    env.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") openInvite(); });
+    musicBtn.onclick = () => { if (audio.paused) { audio.play().catch(() => {}); musicBtn.textContent = "❚❚"; } else { audio.pause(); musicBtn.textContent = "♪"; } };
+
+    function revealOnScroll() {
+      const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("show"); io.unobserve(e.target); } }), { threshold: .15 });
+      document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+    }
+
+    // ---- countdown ----
+    function tick() {
+      const diff = WEDDING_DATE - Date.now(), set = (id, v) => document.getElementById(id).textContent = v;
+      if (diff <= 0) { ["d", "h", "m", "s"].forEach(i => set(i, 0)); return; }
+      set("d", Math.floor(diff / 864e5)); set("h", Math.floor(diff / 36e5 % 24)); set("m", Math.floor(diff / 6e4 % 60)); set("s", Math.floor(diff / 1e3 % 60));
+    }
+    tick(); setInterval(tick, 1000);
+
+    // ---- calendar + RSVP ----
+    const fmt = d => d.toISOString().replace(/[-:]|\.\d{3}/g, "");
+    const end = new Date(WEDDING_DATE.getTime() + 5 * 36e5);
+    document.getElementById("calBtn").href = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(BRIDE + " & " + GROOM + "'s Wedding") + "&dates=" + fmt(WEDDING_DATE) + "/" + fmt(end) + "&location=" + encodeURIComponent(VENUE);
+    document.getElementById("rsvpForm").addEventListener("submit", e => {
+      e.preventDefault();
+      const msg = `Assalamu alaikum! This is ${name.value}.\n${attend.value}\nGuests: ${guests.value}\n${note.value}`;
+      open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
+      for (let i = 0; i < 80; i++) spawn(W / 2, H / 2, true);
+    });
+  </script>
+</body>
+</html>
