@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aisha & Aklaquur – Wedding Invitation</title>
-  <meta name="description" content="You are invited to the wedding of Aisha Zohra & Aklaquur Rahman" />
+  <title>Fathima & Muhammed – Wedding Invitation</title>
+  <meta name="description" content="You are invited to the wedding of Fathima & Muhammed" />
   <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Aref+Ruqaa:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -331,8 +331,8 @@
 
   <script>
     /* ========= EDIT THESE ========= */
-    const BRIDE = "Aisha Zohra";
-    const GROOM = "Aklaquur Rahman";
+    const BRIDE = "Fathima";
+    const GROOM = "Muhammed";
     const WEDDING_DATE = new Date("2026-12-12T17:30:00+04:00");
     const RSVP_BY = "28 November 2026";
     const VENUE = "Grand Palace Ballroom, Dubai";
@@ -435,12 +435,13 @@
     function openInvite() {
       if (opened) return; opened = true;
       env.classList.add("open");
+      // start music right inside the tap so phones/browsers allow it
+      audio.play().then(() => musicBtn.textContent = "❚❚").catch(() => {});
       setTimeout(() => { const r = env.getBoundingClientRect(); for (let i = 0; i < 110; i++) spawn(r.left + r.width / 2, r.top + 30, true); }, 700);
       setTimeout(() => {
         document.getElementById("intro").classList.add("gone");
         document.body.classList.remove("locked"); document.body.classList.add("opened");
         petalsOn = true; window.scrollTo(0, 0); revealOnScroll();
-        audio.play().then(() => musicBtn.textContent = "❚❚").catch(() => {});
       }, 2400);
     }
     env.addEventListener("click", openInvite);
